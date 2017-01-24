@@ -1,0 +1,9 @@
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\bin\Debug\Lab1.exe.config
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\bin\Debug\Lab1.exe
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\bin\Debug\Lab1.pdb
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\obj\Debug\Lab1.exe
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\obj\Debug\Lab1.pdb
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\bin\Debug\Dynamitey.dll
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\bin\Debug\Dynamitey.pdb
+C:\gitprojs\CST8359-dotNET-Enterprise-Appl\Labs\Lab1\Lab1\bin\Debug\Dynamitey.xml
