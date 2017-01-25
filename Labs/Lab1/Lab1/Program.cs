@@ -23,7 +23,7 @@ namespace Lab1
             DISP_CNT_D_WORDS: new { id_ = '7', desc = "Get and display of words that end with 'd' and display the count"}, 
             DISP_CNT_GT4_WORDS: new { id_ = '8', desc = "Get and display of words that are greater than 4 characters long, and display the count"},
             DISP_CNT_LT3_A_WORDS: new { id_ = '9', desc = "Get and display of words that are less than 3 characters long and start with the letter 'a', and display the count"},
-            EXIT: new { id_ = 'x', desc = "Exist"}
+            EXIT: new { id_ = 'x', desc = "Exit"}
         );
 
         private static readonly int NUM_MENU_OPTS = ((IDictionary<string, object>)MENU_OPTS).Count;
@@ -53,8 +53,7 @@ namespace Lab1
             foreach (var it in MENU_OPTS)
             {
                 dynamic menuObj = it.Value;
-                optionsArr[i] = menuObj.id_ + " - " + menuObj.desc;
-                ++i;
+                optionsArr[i++] = menuObj.id_ + " - " + menuObj.desc;
             }
             return String.Join(
                 Environment.NewLine,
