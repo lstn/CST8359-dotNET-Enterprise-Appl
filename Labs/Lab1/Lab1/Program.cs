@@ -14,16 +14,16 @@ namespace Lab1
         private static readonly dynamic MenuBuilder = Builder.New<ExpandoObject>();
         private static readonly ExpandoObject MENU_OPTS = MenuBuilder.Expando
         (
-            IMPORT_WORDS: MenuBuilder.New<ExpandoObject>('1', "Import words from files"),
-            BUBBLE_SORT: MenuBuilder.New<ExpandoObject>('2', "Bubble sort words"),
-            LINQ_LAMBDA_SORT: MenuBuilder.New<ExpandoObject>('3', "LINQ.Lambda sort"),
-            CNT_DISTINCT: MenuBuilder.New<ExpandoObject>('4', "Count the distinct words"),
-            FIRST_TEN: MenuBuilder.New<ExpandoObject>('5', "Take the first 10 words"),
-            CNT_J_WORDS: MenuBuilder.New<ExpandoObject>('6', "Get the number of words that start with 'j' and display the count"),
-            DISP_CNT_D_WORDS: MenuBuilder.New<ExpandoObject>('7', "Get and display of words that end with 'd' and display the count"), 
-            DISP_CNT_GT4_WORDS: MenuBuilder.New<ExpandoObject>('8', "Get and display of words that are greater than 4 characters long, and display the count"),
-            DISP_CNT_LT3_A_WORDS: MenuBuilder.New<ExpandoObject>('9', "Get and display of words that are less than 3 characters long and start with the letter 'a', and display the count"),
-            EXIT: MenuBuilder.New<ExpandoObject>('x', "Exist")
+            IMPORT_WORDS: new { id_ = '1', desc = "Import words from files" },
+            BUBBLE_SORT: new { id_ = '2', desc = "Bubble sort words" },
+            LINQ_LAMBDA_SORT: new { id_ = '3', desc = "LINQ.Lambda sort"},
+            CNT_DISTINCT: new { id_ = '4', desc = "Count the distinct words"},
+            FIRST_TEN: new { id_ = '5', desc = "Take the first 10 words"},
+            CNT_J_WORDS: new { id_ = '6', desc = "Get the number of words that start with 'j' and display the count"},
+            DISP_CNT_D_WORDS: new { id_ = '7', desc = "Get and display of words that end with 'd' and display the count"}, 
+            DISP_CNT_GT4_WORDS: new { id_ = '8', desc = "Get and display of words that are greater than 4 characters long, and display the count"},
+            DISP_CNT_LT3_A_WORDS: new { id_ = '9', desc = "Get and display of words that are less than 3 characters long and start with the letter 'a', and display the count"},
+            EXIT: new { id_ = 'x', desc = "Exist"}
         );
 
         private static readonly int NUM_MENU_OPTS = ((IDictionary<string, object>)MENU_OPTS).Count;
@@ -52,12 +52,8 @@ namespace Lab1
             
             foreach (var it in MENU_OPTS)
             {
-                var dictRepr = ((IDictionary<char, string>)it.Value).First();
-                var realValue = MenuBuilder.Expando(
-                    k: dictRepr.Key,
-                    v: dictRepr.Value
-                    );
-                optionsArr[i] = realValue.k + " - " + realValue.v;
+                dynamic menuObj = it.Value;
+                optionsArr[i] = menuObj.id_ + " - " + menuObj.desc;
                 ++i;
             }
             return String.Join(
