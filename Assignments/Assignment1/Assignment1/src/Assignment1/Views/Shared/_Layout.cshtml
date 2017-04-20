@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        <link href="~/css/StyleSheet.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            @if (Context.Session.GetInt32("isLoggedIn").Equals(1))
+            {
+                <div>Hello @Context.Session.GetString("userFirstName") @Context.Session.GetString("userLastName")</div>
+                <br />
+                @if (Context.Session.GetInt32("userRoleId").Equals(2))
+                {
+                    <a asp-controller="Home" asp-action="AddBlogPost">Add Blog Post</a>
+                }
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Login">Login</a>
+                <a asp-controller="Home" asp-action="Register">Register</a>
+            }
+        </header>
+        <div class="content">
+            @RenderBody()
+        </div>
+        <footer>
+            Lucas Estienne - esti0011@algonquinlive.com - 040 819 959
+        </footer>
+    </body>
+</html>

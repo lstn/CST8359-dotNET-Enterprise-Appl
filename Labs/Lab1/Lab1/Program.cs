@@ -26,12 +26,24 @@ namespace Lab1
             EXIT: new { id_ = 'x', desc = "Exit"}
         );
 
-        private static readonly int NUM_MENU_OPTS = ((IDictionary<string, object>)MENU_OPTS).Count;
+        private static readonly int NUM_MENU_OPTS = MENU_OPTS.Count();//((IDictionary<string, object>)MENU_OPTS).Count;
         static void Main(string[] args)
         {
-            Console.WriteLine(GetMenuString());
-            Console.Write("Make a selection: ");
-            string input = Console.In.ReadLine();
+            bool complete = false;
+            while (!complete)
+            {
+                Console.WriteLine(MENU_OPTS);
+                Console.WriteLine(GetMenuString());
+                Console.Write("Make a selection: ");
+                string input = Console.In.ReadLine();
+                switch (input[0])
+                {
+                    case '2':
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private static string GetMenuString()

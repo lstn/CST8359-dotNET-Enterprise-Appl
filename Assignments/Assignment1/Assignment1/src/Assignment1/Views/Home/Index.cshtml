@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model IEnumerable<Assignment1.Models.BlogPost>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+<h3>Index</h3>
+<div>
+    @if (Model == null || Model.Count() < 1)
+    {
+        <h5>No posts have been posted to the blog yet!</h5>
+    }
+    else
+    {
+        @foreach (var bp in Model.Reverse())
+        {
+            <div>
+                <h4><a asp-controller="Home" asp-action="DisplayFullBlogPost" asp-route-id="@bp.BlogPostId">@bp.Title</a></h4>
+                <p>
+                    @if (bp.Content.Length > 100)
+                    {
+                        @bp.Content.Substring(0, 99)
+                    }
+                    else
+                    {
+                        @bp.Content
+                    }
+                </p>
+                <p>
+                    @bp.Posted
+                    @if (Context.Session.GetInt32("isLoggedIn").Equals(1) && Context.Session.GetInt32("userRoleId").Equals(2))
+                    {
+                        <a asp-controller="Home" asp-action="EditBlogPost" asp-route-id="@bp.BlogPostId"> - Edit Blog Post</a>
+                    }
+                </p>
+
+            </div>
+            <br />
+        }
+
+    }
+
+</div>
