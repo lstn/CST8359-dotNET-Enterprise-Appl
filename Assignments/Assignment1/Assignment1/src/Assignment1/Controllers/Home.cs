@@ -12,9 +12,9 @@ namespace Assignment1.Controllers
 {
     public class Home : Controller
     {
-        private Assignment1DataContext _blogContext;
+        private Assignment2DataContext _blogContext;
 
-        public Home(Assignment1DataContext context)
+        public Home(Assignment2DataContext context)
         {
             _blogContext = context;
         }

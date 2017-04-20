@@ -20,8 +20,8 @@ namespace Assignment1
         {
             //var connection = @"Server=localhost;Database=Assignment1;Trusted_Connection=True;MultipleActiveResultSets=true";
             // if that fails try: var connection =
-            var connection = @"Server=localhost\SQLEXPRESS;Database=Assignment1;Trusted_Connection=True;MultipleActiveResultSets=true";
-            services.AddDbContext<Assignment1DataContext>(options => options.UseSqlServer(connection));
+            var connection = @"Server=localhost\SQLEXPRESS;Database=Assignment2;Trusted_Connection=True;MultipleActiveResultSets=true";
+            services.AddDbContext<Assignment2DataContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
