@@ -34,7 +34,13 @@ namespace Assignment2.Controllers
                         FirstName = HttpContext.Request.Form["FirstName"],
                         LastName = HttpContext.Request.Form["LastName"],
                         EmailAddress = HttpContext.Request.Form["EmailAddress"],
-                        Password = HttpContext.Request.Form["Password"]
+                        Password = HttpContext.Request.Form["Password"],
+                        DateOfBirth = Convert.ToDateTime(HttpContext.Request.Form["DateOfBirth"]),
+                        City = HttpContext.Request.Form["City"],
+                        Address = HttpContext.Request.Form["Address"],
+                        PostalCode = HttpContext.Request.Form["PostalCode"],
+                        Country = HttpContext.Request.Form["Country"]
+
                     };
                     _blogContext.Users.Add(newUser);
                     _blogContext.SaveChanges();
@@ -70,7 +76,8 @@ namespace Assignment2.Controllers
 
                         return RedirectToAction("Index");
                     }
-                } else
+                }
+                else
                 {
                     return View();
                 }
@@ -96,18 +103,23 @@ namespace Assignment2.Controllers
             {
                 try
                 {
+                    var checkedContent = HttpContext.Request.Form["CommentContent"].ToString();
+                    foreach(var w in _blogContext.BadWords)
+                    {
+                        checkedContent.Replace(w.Word, "*****");
+                    }
                     var newComment = new Comment
                     {
                         BlogPostId = pId,
-                        Content = HttpContext.Request.Form["CommentContent"],
-                        UserId = (int) HttpContext.Session.GetInt32("userId")
+                        Content = checkedContent,
+                        UserId = (int)HttpContext.Session.GetInt32("userId")
                     };
                     _blogContext.Comments.Add(newComment);
                     _blogContext.SaveChanges();
                 }
                 catch (Exception)
                 {
-                    
+
                 }
             }
             var bpost = _blogContext.BlogPosts.Where(bp => bp.BlogPostId.Equals(pId)).FirstOrDefault();
@@ -128,12 +140,12 @@ namespace Assignment2.Controllers
                 {
                     var newBlogPost = new BlogPost
                     {
-                        UserId = (int) HttpContext.Session.GetInt32("userId"),
+                        UserId = (int)HttpContext.Session.GetInt32("userId"),
                         Title = HttpContext.Request.Form["BlogTitle"],
                         Content = HttpContext.Request.Form["BlogContent"],
                         Posted = DateTime.Now
                     };
-                    
+
                     _blogContext.BlogPosts.Add(newBlogPost);
                     _blogContext.SaveChanges();
                     return RedirectToAction("Index");
@@ -143,7 +155,8 @@ namespace Assignment2.Controllers
                 {
                     return View();
                 }
-            } else if (!HttpContext.Session.GetInt32("isLoggedIn").Equals(1))
+            }
+            else if (!HttpContext.Session.GetInt32("isLoggedIn").Equals(1))
             {
                 return RedirectToAction("Login");
             }
@@ -159,8 +172,8 @@ namespace Assignment2.Controllers
             int pId = Int32.Parse(rpath);
             var bpost = _blogContext.BlogPosts.Where(bp => bp.BlogPostId.Equals(pId)).FirstOrDefault();
 
-            if (HttpContext.Request.Method.ToString() == "POST" 
-                    && HttpContext.Session.GetInt32("isLoggedIn").Equals(1) 
+            if (HttpContext.Request.Method.ToString() == "POST"
+                    && HttpContext.Session.GetInt32("isLoggedIn").Equals(1)
                     && HttpContext.Session.GetInt32("userRoleId").Equals(2))
             {
                 try
@@ -177,7 +190,7 @@ namespace Assignment2.Controllers
                 {
                     return View(bpost);
                 }
-            } 
+            }
             else if (!HttpContext.Session.GetInt32("isLoggedIn").Equals(1))
             {
                 return RedirectToAction("Login");
@@ -187,9 +200,97 @@ namespace Assignment2.Controllers
                 return RedirectToAction("Index");
             }
 
-                return View(bpost);
+            return View(bpost);
         }
 
+        [HttpGet]
+        public IActionResult DeleteBlogPost(int postId)
+        {
+            string rpath = HttpContext.Request.Path.Value.Split('/').Last();
+            int pId = Int32.Parse(rpath);
+            var bpost = _blogContext.BlogPosts.Where(bp => bp.BlogPostId.Equals(pId)).FirstOrDefault();
 
+            if (HttpContext.Session.GetInt32("isLoggedIn").Equals(1)
+                    && HttpContext.Session.GetInt32("userRoleId").Equals(2))
+            {
+                try
+                {
+                    _blogContext.Remove(bpost);
+
+                    _blogContext.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else if (!HttpContext.Session.GetInt32("isLoggedIn").Equals(1))
+            {
+                return RedirectToAction("Login");
+            }
+            else if (!HttpContext.Session.GetInt32("userRoleId").Equals(2))
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet, HttpPost]
+        public IActionResult EditProfile()
+        {
+            if (HttpContext.Session.GetInt32("isLoggedIn").Equals(1))
+            {
+                var curUser = (from c in _blogContext.Users where c.UserId == HttpContext.Session.GetInt32("userId") select c).FirstOrDefault();
+                return View(curUser);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        // GET: /<controller>/
+        [HttpGet, HttpPost]
+        public IActionResult ViewBadWords()
+        {
+            if (HttpContext.Session.GetInt32("isLoggedIn").Equals(1)
+                        && HttpContext.Session.GetInt32("userRoleId").Equals(2))
+            {
+                if (HttpContext.Request.Method.ToString() == "POST")
+                {
+
+                    try
+                    {
+                        var newBadWord = new BadWord
+                        {
+                            Word = HttpContext.Request.Form["Word"]
+                        };
+                        _blogContext.BadWords.Add(newBadWord);
+                        _blogContext.SaveChanges();
+                        return View(_blogContext.BadWords);
+                    }
+                    catch (Exception)
+                    {
+                        return View(_blogContext.BadWords);
+                    }
+
+                }
+                return View(_blogContext.BadWords);
+
+            }
+            else if (!HttpContext.Session.GetInt32("isLoggedIn").Equals(1))
+            {
+                return RedirectToAction("Login");
+            }
+            else if (!HttpContext.Session.GetInt32("userRoleId").Equals(2))
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

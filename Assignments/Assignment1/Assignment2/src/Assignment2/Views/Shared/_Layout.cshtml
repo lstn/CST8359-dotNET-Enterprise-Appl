@@ -12,10 +12,12 @@
             @if (Context.Session.GetInt32("isLoggedIn").Equals(1))
             {
                 <div>Hello @Context.Session.GetString("userFirstName") @Context.Session.GetString("userLastName")</div>
+                <a asp-controller="Home" asp-action="EditProfile">Edit Profile</a>
                 <br />
                 @if (Context.Session.GetInt32("userRoleId").Equals(2))
                 {
                     <a asp-controller="Home" asp-action="AddBlogPost">Add Blog Post</a>
+                    <a asp-controller="Home" asp-action="ViewBadWords">View Bad Words</a>
                 }
             }
             else

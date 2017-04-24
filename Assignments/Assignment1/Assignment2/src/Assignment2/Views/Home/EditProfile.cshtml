@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model Assignment2.Models.User
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+<h3>Edit Profile</h3>
+<form asp-controller="Home" asp-action="EditProfile" method="post">
+    <table>
+        <tr>
+            <td>Email Address</td>
+            <td><input type="email" name="EmailAddress" value="@Model.EmailAddress" required /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="Password" required /></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input name="City" value="@Model.City" required /></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><input name="Address" value="@Model.Address" required /></td>
+        </tr>
+        <tr>
+            <td>Postal Code</td>
+            <td><input name="PostalCode" value="@Model.PostalCode" required /></td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td><input name="Country" value="@Model.Country" required /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Save Changes" />
+</form> 

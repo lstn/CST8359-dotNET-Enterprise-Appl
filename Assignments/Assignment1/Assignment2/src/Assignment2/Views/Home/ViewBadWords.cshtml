@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<Assignment2.Models.BadWord>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+<h3>Add New Word</h3>
+<form asp-controller="Home" asp-action="ViewBadWords" method="post">
+    <table>
+        <tr>
+            <td><input type="text" name="Word" required /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Add" />
+</form>
+<hr />
+<table>
+    @foreach (var w in Model.Reverse()){
+        <tr>
+            <td>@w.BadWordId</td>
+            <td>@w.Word</td>
+        </tr>
+
+    }
+</table>

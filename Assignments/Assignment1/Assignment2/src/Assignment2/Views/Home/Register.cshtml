@@ -10,7 +10,7 @@
     <table>
         <tr>
             <td>Role (1 for user 2 for admin)</td>
-            <td><select name="RoleId"></select><input name="RoleId" required /></td>
+            <td><select name="RoleId"><option value="1">General User</option><option value="2">Administrator</option></select></td>
         </tr>
         <tr>
             <td>First Name</td>
@@ -28,6 +28,26 @@
             <td>Password</td>
             <td><input type="password" name="Password" required /></td>
         </tr>
+        <tr>
+            <td>Date Of Birth</td>
+            <td><input type="date" name="DateOfBirth" min="1901-01-01" max="2003-01-01" required /></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input name="City" required /></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td><input name="Address" required /></td>
+        </tr>
+        <tr>
+            <td>Postal Code</td>
+            <td><input name="PostalCode" required /></td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td><input name="Country" required /></td>
+        </tr>
     </table>
     <input type="submit" value="Register" />
-</form>
+</form> 

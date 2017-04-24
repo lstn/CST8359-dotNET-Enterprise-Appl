@@ -38,5 +38,11 @@ namespace Assignment2.Models
             get;
             set;
         }
+
+        public int Rating
+        {
+            get;
+            set;
+        }
     }
 }

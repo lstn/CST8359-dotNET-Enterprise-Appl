@@ -51,5 +51,40 @@ namespace Assignment2.Models
             get;
             set;
         }
+
+        [DataType(DataType.DateTime)]
+        public DateTime DateOfBirth
+        {
+            get;
+            set;
+        }
+
+        [StringLength(50)]
+        public string City  
+        {
+            get;
+            set;
+        }
+
+        [StringLength(50)]
+        public string Address
+        {
+            get;
+            set;
+        }
+
+        [StringLength(50)]
+        public string PostalCode
+        {
+            get;
+            set;
+        }
+
+        [StringLength(50)]
+        public string Country
+        {
+            get;
+            set;
+        }
     }
 }

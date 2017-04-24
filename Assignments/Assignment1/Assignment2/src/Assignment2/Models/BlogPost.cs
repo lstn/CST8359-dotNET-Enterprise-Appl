@@ -30,6 +30,13 @@ namespace Assignment2.Models
             set;
         }
 
+        [StringLength(400)]
+        public string ShortDescription
+        {
+            get;
+            set;
+        }
+
         [StringLength(4000)]
         public string Content
         {
@@ -39,6 +46,12 @@ namespace Assignment2.Models
 
         [DataType(DataType.DateTime)]
         public DateTime Posted
+        {
+            get;
+            set;
+        }
+
+        public bool IsAvailable
         {
             get;
             set;

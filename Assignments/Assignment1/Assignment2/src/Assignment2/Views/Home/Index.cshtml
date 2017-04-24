@@ -21,20 +21,14 @@
             <div>
                 <h4><a asp-controller="Home" asp-action="DisplayFullBlogPost" asp-route-id="@bp.BlogPostId">@bp.Title</a></h4>
                 <p>
-                    @if (bp.Content.Length > 100)
-                    {
-                        @bp.Content.Substring(0, 99)
-                    }
-                    else
-                    {
-                        @bp.Content
-                    }
+                    @bp.ShortDescription
                 </p>
                 <p>
                     @bp.Posted
                     @if (Context.Session.GetInt32("isLoggedIn").Equals(1) && Context.Session.GetInt32("userRoleId").Equals(2))
                     {
                         <a asp-controller="Home" asp-action="EditBlogPost" asp-route-id="@bp.BlogPostId"> - Edit Blog Post</a>
+                        <a asp-controller="Home" asp-action="DeleteBlogPost" asp-route-id="@bp.BlogPostId"> - Delete Blog Post</a>
                     }
                 </p>
 
