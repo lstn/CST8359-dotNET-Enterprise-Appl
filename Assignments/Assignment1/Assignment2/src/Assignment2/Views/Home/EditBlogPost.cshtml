@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model Assignment2.Models.BlogPost
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+<h3>Edit Blog Post</h3>
+<form asp-controller="Home" asp-action="EditBlogPost" method="post">
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input name="BlogTitle" value="@Model.Title" required /></td>
+        </tr>
+        <tr>
+            <td>Content</td>
+            <td><textarea name="BlogContent" rows="10" cols="50" required>@Model.Content</textarea></td>
+        </tr>
+    </table>
+    <input type="submit" value="Save Changes" />
+</form>

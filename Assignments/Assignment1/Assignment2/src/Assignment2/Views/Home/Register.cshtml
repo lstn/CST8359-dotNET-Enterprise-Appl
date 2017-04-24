@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+
+}
+<h3>Create User</h3>
+<form asp-controller="Home" asp-action="Register" method="post">
+    <table>
+        <tr>
+            <td>Role (1 for user 2 for admin)</td>
+            <td><select name="RoleId"></select><input name="RoleId" required /></td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td><input name="FirstName" required /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input name="LastName" required /></td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td><input type="email" name="EmailAddress" required /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="Password" required /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Register" />
+</form>
